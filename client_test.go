@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
+	"strings"
 	"testing"
 )
 
@@ -19,4 +21,15 @@ func TestChan(t *testing.T) {
 		fmt.Print(str)
 	}
 	t.Log("testChan end")
+}
+
+func TestFile() {
+	bytes, err := ioutil.ReadFile(src_file_name)
+	if nil != err {
+		fmt.Println(err)
+		return err
+	}
+
+	temp := strings.Split(string(bytes), "\n")
+	fmt.Println(temp)
 }
