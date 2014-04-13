@@ -1,6 +1,7 @@
 package main
 
 import (
+	//"fmt"
 	"os/exec"
 	"strings"
 )
@@ -8,7 +9,8 @@ import (
 func getHost(domain string) {
 	cmd := exec.Command("gethostip", "-d", domain)
 	x, err := cmd.Output()
-	if err == nil {
+	if err != nil {
+		domains[domain] = ""
 		lock <- false
 	}
 	res := string(x)
