@@ -1,3 +1,8 @@
+CREATE TABLE IF NOT EXISTS `domain_lists` (
+  `domain` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `ip` varchar(255) CHARACTER SET utf8 NOT NULL,
+  `refresh_time` bigint(20) unsigned NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 INSERT INTO `domain_lists` (`domain`) VALUES ('1-ps.googleusercontent.com'),
 ('1.331mi.net'),
 ('1.551mi.com'),
