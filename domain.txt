@@ -1,7 +1,0 @@
-www.cloverphp.net
-qqq.cloverphp.net
-eee.cloverphp.net
-rrr.cloverphp.net
-www.cloverphp.com
-eee.cloverphp.com
-rrr.cloverphp.com
