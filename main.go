@@ -74,10 +74,9 @@ func main() {
 			//}
 			cur_routines++
 			routine_num++
-			if max_rows != query_rows+1 {
+			if i == query_rows-1 {
 				goto RUNSQL
-			}
-			if cur_routines < max_routines {
+			} else if cur_routines < max_routines {
 				continue
 			}
 
