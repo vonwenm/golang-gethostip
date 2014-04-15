@@ -8,6 +8,6 @@ var (
 	db_pass      string = ""
 	db_host      string = "localhost"
 	db_port      int    = 3306
-	max_routines int    = 5
-	max_rows     int    = 10
+	max_routines int    = 100
+	max_rows     int    = 100
 )

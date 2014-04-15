@@ -57,10 +57,10 @@ func main() {
 				fmt.Printf("read domain: %s\n", temp_domain)
 			}
 			if rows.Next() == false {
+				query_rows++
 				break
 			}
 		}
-
 		rows.Close()
 
 		cur_routines := 0
@@ -69,22 +69,29 @@ func main() {
 			temp_domain = indexes[i]
 			cur_domains[cur_routines] = i
 			go getHost(temp_domain)
-			if app_debug {
-				fmt.Printf("read domain: %s\n", temp_domain)
-			}
+			//if app_debug {
+			//	fmt.Printf("get domain: %s\n", temp_domain)
+			//}
 			cur_routines++
 			routine_num++
+			if max_rows != query_rows+1 {
+				goto RUNSQL
+			}
 			if cur_routines < max_routines {
 				continue
 			}
 
 			//
+		RUNSQL:
 			for j := 0; j < cur_routines; j++ {
-				temp := <-lock
-				if app_debug {
-					fmt.Printf("read routine result:%v\n", temp)
-				}
+				<-lock
+				//temp := <-lock
+				//if app_debug {
+				//	fmt.Printf("read routine result:%v\n", temp)
+				//}
+			}
 
+			for j := 0; j < cur_routines; j++ {
 				timestamp := time.Now().Unix()
 				sqlstr = fmt.Sprintf("update %s set ip='%s',refresh_time=%d where domain='%s'", domain_table, domains[indexes[j]], timestamp, indexes[j])
 				if app_debug {
